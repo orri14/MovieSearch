@@ -25,7 +25,6 @@ namespace MovieSearch.iOS
 
             Window.RootViewController = new UINavigationController(navController);
             
-
             // make the window visible
             Window.MakeKeyAndVisible();
 
