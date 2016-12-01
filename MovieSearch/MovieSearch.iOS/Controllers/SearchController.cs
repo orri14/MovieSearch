@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using UIKit;
-using MovieSearch;
+
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
 
-namespace MovieSearch.iOS
+
+namespace MovieSearch.iOS.Controllers
 {
     public class SearchController : UIViewController
     {
@@ -20,12 +21,18 @@ namespace MovieSearch.iOS
 
         private int _yCoord;
 
-        private List<string> _movies;
+        public SearchController()
+        {
+            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
+        }
 
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            this.Title = "Movie Search";
+
             this.View.BackgroundColor = UIColor.White;
 
             this._yCoord = StartY;
@@ -34,21 +41,47 @@ namespace MovieSearch.iOS
 
             var titleField = this.createTitleField();
 
-            var movieLabel = this.createMovieLabel();
-
             var searchButton = this.createButton("Search Movie");
 
             searchButton.TouchUpInside += async (sender, args) =>
             {
-                titleField.ResignFirstResponder();
 
-                MovieDbFactory.RegisterSettings(new MyDbSettings());
+                MovieDbFactory.RegisterSettings("214da67793e3bbe4c504e678b40e82aa", "http://api.themoviedb.org/3/");
+
+                titleField.ResignFirstResponder();
 
                 var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
 
-
-                //UIACTIVITYINDICATOR HERNA!
                 ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(titleField.Text);
+
+
+                List<FilmInfo> movies = new List<FilmInfo>();
+                
+                foreach(MovieInfo info in response.Results)
+                {
+                    FilmInfo film = new FilmInfo();
+                    film.title = info.Title;
+                    film.year = info.ReleaseDate.ToString();
+                    film.rating = info.VoteAverage.ToString();
+                    film.description = info.Overview;
+                    film.imageName = info.PosterPath;
+
+                    List<string> genres = new List<string>();
+                    foreach(var genre in info.Genres)
+                    {
+                        genres.Add(genre.ToString());
+                    }
+                    film.genres = genres;
+
+                    ApiQueryResponse<MovieCredit> credits = await movieApi.GetCreditsAsync(info.Id);
+
+                    film.cast = credits.ToString();
+
+                    movies.Add(film);
+                }
+
+
+
                 //------------------
 
 
@@ -63,13 +96,11 @@ namespace MovieSearch.iOS
             AddSubview (activitySpinner);
             activitySpinner.StartAnimating ();
                  */
-
-
-
+                
 
                 try
                 {
-                    this.NavigationController.PushViewController(new MovieListController(response.Results.ToList()), true);
+                    this.NavigationController.PushViewController(new MovieListController(movies), true);
                 }
                 catch (Exception e)
                 {
@@ -79,20 +110,15 @@ namespace MovieSearch.iOS
 
                 //Afhverju exception? Er ekki nog ad tjekka hvort response se null?
                 /*
-                try
-                {
-                    MovieInfo info = response.Results[0];
-                    movieLabel.Text = info.Title;
-                } catch(Exception e) { throw e;}
-                */
 
+                */
+                
                 
             };
 
             this.View.AddSubview(prompt);
             this.View.AddSubview(titleField);
             this.View.AddSubview(searchButton);
-            this.View.AddSubview(movieLabel);
         }
 
         private UIButton createButton(string title)

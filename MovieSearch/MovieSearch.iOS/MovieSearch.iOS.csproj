@@ -75,11 +75,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MovieSearch\MovieSearch.csproj">
-      <Name>MovieSearch</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
@@ -142,14 +137,25 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MovieListSource.cs" />
-    <Compile Include="MovieListController.cs" />
-    <Compile Include="SearchController.cs" />
+    <Compile Include="Controllers\TabBarController.cs" />
+    <Compile Include="Views\CustomCell.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\MovieListSource.cs" />
+    <Compile Include="Controllers\MovieListController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieSearch\MovieSearch.csproj">
+      <Project>{25feb062-7b61-47e8-b2d8-c8377b670d4b}</Project>
+      <Name>MovieSearch</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

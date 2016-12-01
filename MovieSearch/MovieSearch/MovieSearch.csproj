@@ -31,7 +31,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Movies.cs" />
+    <Compile Include="Model\FilmInfo.cs" />
     <Compile Include="MyDbSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

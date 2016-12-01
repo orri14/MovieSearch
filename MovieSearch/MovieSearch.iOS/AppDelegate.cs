@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using UIKit;
+using MovieSearch.iOS.Controllers;
 
 namespace MovieSearch.iOS
 {
@@ -23,7 +24,7 @@ namespace MovieSearch.iOS
             var cvc = new SearchController();
             var navController = new UINavigationController(cvc);
 
-            Window.RootViewController = new UINavigationController(navController);
+            Window.RootViewController = navController;
             
             // make the window visible
             Window.MakeKeyAndVisible();
