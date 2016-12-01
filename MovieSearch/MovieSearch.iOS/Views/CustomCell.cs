@@ -5,6 +5,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 using DM.MovieApi.MovieDb.Movies;
+using MovieSearch.Model;
 
 namespace MovieSearch.iOS
 {
@@ -44,7 +45,7 @@ namespace MovieSearch.iOS
         {
             base.LayoutSubviews();
 
-            this._imageView.Frame = new CGRect(this.ContentView.Bounds.Width - 60, 5, 33, 33);
+            this._imageView.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 10, 25);
             this._titleLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
             this._actorsLabel.Frame = new CGRect(100, 25, 100, 20);
             this._ratingLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 10, 25);
@@ -53,6 +54,8 @@ namespace MovieSearch.iOS
         public void UpdateCell(FilmInfo info)
         {
             this._imageView.Image = UIImage.FromFile(info.imageName);
+            Console.WriteLine(info.imageName);
+            Console.WriteLine(this._imageView);
             this._titleLabel.Text = info.title + " (" + info.year + ")";
             this._actorsLabel.Text = "";
             

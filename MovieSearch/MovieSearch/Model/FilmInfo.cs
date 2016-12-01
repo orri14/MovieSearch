@@ -10,7 +10,7 @@ using System.Threading.Tasks;
  * Bua i staðinn til listann í SearchController
  */
 
-namespace MovieSearch
+namespace MovieSearch.Model
 {
     public class FilmInfo
     {

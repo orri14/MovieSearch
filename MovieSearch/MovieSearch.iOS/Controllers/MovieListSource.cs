@@ -4,6 +4,7 @@ using System.Text;
 using Foundation;
 using UIKit;
 using DM.MovieApi.MovieDb.Movies;
+using MovieSearch.Model;
 
  
 namespace MovieSearch.iOS.Controllers

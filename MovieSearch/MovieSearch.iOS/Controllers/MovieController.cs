@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UIKit;
+using MovieSearch.Model;
 
 namespace MovieSearch.iOS.Controllers
 {
