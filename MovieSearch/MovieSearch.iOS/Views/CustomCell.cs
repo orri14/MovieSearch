@@ -19,23 +19,25 @@ namespace MovieSearch.iOS
         {
             this._imageView = new UIImageView();
 
+            this.BackgroundColor = UIColor.FromRGB(70, 0, 0);
+
             this._titleLabel = new UILabel()
             {
-                Font = UIFont.FromName("Cochin-BoldItalic", 22f),
-                TextColor = UIColor.FromRGB(127, 51, 0),
+                Font = UIFont.FromName("HelveticaNeue-Bold", 12f),
+                TextColor = UIColor.FromRGB(218, 165, 32)
             };
 
             this._actorsLabel = new UILabel()
             {
-                Font = UIFont.FromName("Cochin-BoldItalic", 12f),
-                TextColor = UIColor.FromRGB(90, 51, 0),
+                Font = UIFont.FromName("Helvetica", 8f),
+                TextColor = UIColor.White
             };
 
             this._ratingLabel = new UILabel()
             {
-                Font = UIFont.FromName("AmericanTypewriter", 12f),
-                TextColor = UIColor.FromRGB(38, 127, 0),
-                TextAlignment = UITextAlignment.Center,
+                Font = UIFont.FromName("HelveticaNeue-Bold", 10f),
+                TextColor = UIColor.FromRGB(218, 165, 32),
+                TextAlignment = UITextAlignment.Center
             };
 
             this.ContentView.AddSubviews(new UIView[] { this._imageView, this._titleLabel, this._actorsLabel, this._ratingLabel });
@@ -47,24 +49,26 @@ namespace MovieSearch.iOS
 
             this._imageView.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 10, 25);
             this._titleLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._actorsLabel.Frame = new CGRect(100, 25, 100, 20);
-            this._ratingLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 10, 25);
+            this._actorsLabel.Frame = new CGRect(5, 25, this.ContentView.Bounds.Width, 20);
+            this._ratingLabel.Frame = new CGRect(this.ContentView.Bounds.Width - 10, 10, 5, 25);
         }
 
         public void UpdateCell(FilmInfo info)
         {
+
             this._imageView.Image = UIImage.FromFile(info.imageName);
-            Console.WriteLine(info.imageName);
-            Console.WriteLine(this._imageView);
+
             this._titleLabel.Text = info.title + " (" + info.year + ")";
+
+
             this._actorsLabel.Text = "";
-            
-            /*
-            for(int i = 0; i < 3; i++)
+            int minNumOfAct = Math.Min(3, info.cast.Count);
+
+            for(int i = 0; i < minNumOfAct; i++)
             {
-                this._actorsLabel += info.cast;
+                this._actorsLabel.Text += (info.cast[i] == null) ? "" : info.cast[i];
+                this._actorsLabel.Text += ((info.cast[i] == null) || (i == 2)) ? "" : ", ";
             }
-            */
             
             this._ratingLabel.Text = info.rating;
 

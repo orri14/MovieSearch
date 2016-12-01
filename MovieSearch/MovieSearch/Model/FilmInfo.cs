@@ -17,7 +17,7 @@ namespace MovieSearch.Model
         public string title { get; set; }
         public string year { get; set; }
         public string imageName { get; set; }
-        public string cast { get; set; } 
+        public List<string> cast { get; set; } 
         public string description { get; set; }
         public List<string> genres { get; set; }
         public string duration { get; set; }
