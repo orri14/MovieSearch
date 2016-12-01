@@ -61,8 +61,8 @@ namespace MovieSearch.iOS.Controllers
                 {
                     FilmInfo film = new FilmInfo();
                     film.title = info.Title;
-                    film.year = info.ReleaseDate.ToString();
-                    film.rating = info.VoteAverage.ToString();
+                    film.year = info.ReleaseDate.Year.ToString();
+                    film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
                     film.description = info.Overview;
                     film.imageName = info.PosterPath;
 
@@ -75,7 +75,12 @@ namespace MovieSearch.iOS.Controllers
 
                     ApiQueryResponse<MovieCredit> credits = await movieApi.GetCreditsAsync(info.Id);
 
-                    film.cast = credits.ToString();
+                    List<string> cast = new List<string>();
+                    foreach (var actor in credits.Item.CastMembers)
+                    {
+                        cast.Add(actor.Name);
+                    }
+                    film.cast = cast;
 
                     movies.Add(film);
                 }

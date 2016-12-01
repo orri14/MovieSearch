@@ -21,7 +21,7 @@ namespace MovieSearch.iOS.Controllers
         {
             base.ViewDidLoad();
 
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.Black;
             this.Title = "Search result";
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
         }
