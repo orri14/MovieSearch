@@ -36,17 +36,7 @@ namespace MovieSearch.iOS.Controllers
         {
             if (this._reload)
             {
-                var centerX = this.View.Frame.Width / 2;
-                var centerY = this.View.Frame.Height / 2;
-
-                activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
-                activitySpinner.Frame = new CGRect(
-                    centerX - activitySpinner.Frame.Width / 2,
-                    centerY - activitySpinner.Frame.Height - 20,
-                    activitySpinner.Frame.Width,
-                    activitySpinner.Frame.Height);
-
-                activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
+                activitySpinner = new Spinner(this.View.Frame).activitySpinner;                
                 this.View.AddSubview(activitySpinner);
                 activitySpinner.StartAnimating();
 
