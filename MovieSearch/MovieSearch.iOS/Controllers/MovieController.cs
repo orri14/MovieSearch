@@ -63,7 +63,7 @@ namespace MovieSearch.iOS.Controllers
             {
                 Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 20),
                 Text = _movieInfo.duration + " min | ",
-                Font = UIFont.FromName("Helvetica", 10f),
+                Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
             
