@@ -37,7 +37,6 @@ namespace MovieSearch.iOS.Controllers
 
             var titleLabel = this.createTitleLabel();
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
-            var actorsLabel = this.createActorsLabel();
             var moviePoster = this.createMoviePoster();
             var descriptionLabel = this.createDescriptionLabel();
             
@@ -45,7 +44,6 @@ namespace MovieSearch.iOS.Controllers
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
-            this.View.AddSubview(actorsLabel);
             this.View.AddSubview(moviePoster);
             this.View.AddSubview(descriptionLabel);
             
@@ -90,38 +88,14 @@ namespace MovieSearch.iOS.Controllers
             return label;
         }
 
-        private UILabel createActorsLabel()
-        {
-            UILabel label = new UILabel()
-            {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 20),
-                Text = _movieInfo.duration + "",
-                Font = UIFont.FromName("Helvetica", 10f),
-                TextColor = UIColor.White
-            };
-
-
-            int numOfActors = Math.Min(5, _movieInfo.cast.Count);
-
-            for (int i = 0; i < numOfActors; i++)
-            {
-                label.Text += _movieInfo.cast[i];
-                label.Text += (i == numOfActors - 1 ? "" : ", ");
-            }
-
-            _yCoord += VerticalStep;
-
-            return label;
-        }
-
         private UILabel createDescriptionLabel()
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin * 2, this.View.Bounds.Height - 20),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 150),
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
-                Lines = 15,
+                Lines = 8,
                 Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
