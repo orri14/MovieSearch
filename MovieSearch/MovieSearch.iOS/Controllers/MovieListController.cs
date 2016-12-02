@@ -23,7 +23,7 @@ namespace MovieSearch.iOS.Controllers
             base.ViewDidLoad();
 
             this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0);
-            this.Title = "Search result";
+            this.Title = "Results";
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
         }
 
