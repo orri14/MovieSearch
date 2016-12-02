@@ -47,7 +47,7 @@ namespace MovieSearch.iOS
                     film.year = info.ReleaseDate.Year.ToString();
                     film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
                     film.description = info.Overview;
-
+                   
                     var posterlink = info.PosterPath;
                     var ImagePath = downloader.LocalPathForFilename(posterlink);
 
@@ -64,10 +64,16 @@ namespace MovieSearch.iOS
 
                     foreach (var genre in info.Genres)
                     {
-                        genres.Add(genre.ToString());
+                        genres.Add(genre.Name);
                     }
                     film.genres = genres;
 
+                    //Get the movie duration
+                    ApiQueryResponse<Movie> movie = await _movieApi.FindByIdAsync(info.Id);
+                    film.duration = movie.Item.Runtime.ToString();
+
+
+                    //Get the cast of a movie
                     ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
 
                     List<string> cast = new List<string>();
