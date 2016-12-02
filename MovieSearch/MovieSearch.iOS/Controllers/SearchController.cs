@@ -22,8 +22,7 @@ namespace MovieSearch.iOS.Controllers
 
         public SearchController()
         {
-            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
-            activitySpinner = new Spinner(this.View.Frame).activitySpinner;
+            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);     
         }
 
 
@@ -33,13 +32,15 @@ namespace MovieSearch.iOS.Controllers
 
             this.Title = "Search";
 
-            this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0); ;
+            this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0);
 
             this._yCoord = StartY;
 
             var titleField = this.createTitleField();
 
             var searchButton = this.createButton("Search");
+
+            activitySpinner = new Spinner(this.View.Frame).activitySpinner;
 
             searchButton.TouchUpInside += async (sender, args) =>
             {
