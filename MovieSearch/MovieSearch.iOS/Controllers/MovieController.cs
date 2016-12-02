@@ -17,7 +17,7 @@ namespace MovieSearch.iOS.Controllers
 
         private const int StartY = 80;
 
-        private const int VerticalStep = 30;
+        private const int VerticalStep = 20;
 
         private int _yCoord;
 
@@ -38,6 +38,7 @@ namespace MovieSearch.iOS.Controllers
             var titleLabel = this.createTitleLabel();
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
             var moviePoster = this.createMoviePoster();
+            var actorsLabel = this.createActorsLabel();
             var descriptionLabel = this.createDescriptionLabel();
             
             
@@ -45,6 +46,7 @@ namespace MovieSearch.iOS.Controllers
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
             this.View.AddSubview(moviePoster);
+            this.View.AddSubview(actorsLabel);
             this.View.AddSubview(descriptionLabel);
             
         }
@@ -53,7 +55,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 30),
                 Text = _movieInfo.title + " (" + _movieInfo.year + ")",
                 Font = UIFont.FromName("HelveticaNeue-Bold", 16f),
                 TextColor = UIColor.FromRGB(218, 165, 32)
@@ -88,6 +90,30 @@ namespace MovieSearch.iOS.Controllers
             return label;
         }
 
+        private UILabel createActorsLabel()
+        {
+            UILabel label = new UILabel()
+            {
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
+                Text = _movieInfo.duration + "",
+                Font = UIFont.FromName("Helvetica", 10f),
+                TextColor = UIColor.White
+            };
+
+
+            int numOfActors = Math.Min(5, _movieInfo.cast.Count);
+
+            for (int i = 0; i < numOfActors; i++)
+            {
+                label.Text += _movieInfo.cast[i];
+                label.Text += (i == numOfActors - 1 ? "" : ", ");
+            }
+
+            _yCoord += VerticalStep;
+
+            return label;
+        }
+
         private UILabel createDescriptionLabel()
         {
             UILabel label = new UILabel()
@@ -99,7 +125,7 @@ namespace MovieSearch.iOS.Controllers
                 Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
-            _yCoord += VerticalStep;
+            
 
             return label;
         }
@@ -111,9 +137,10 @@ namespace MovieSearch.iOS.Controllers
             moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
             moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, ((this.View.Bounds.Width / 2) - 10) * (20/15));
 
+            _yCoord += VerticalStep;
+
             return moviePoster;
         }
-
-
+        
     }
 }
