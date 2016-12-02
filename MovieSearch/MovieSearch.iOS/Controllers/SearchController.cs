@@ -17,9 +17,9 @@ namespace MovieSearch.iOS.Controllers
     {
         private const int HorizontalMargin = 20;
 
-        private const int StartY = 150;
+        private const int StartY = 80;
 
-        private const int StepY = 80;
+        private const int StepY = 50;
 
         private int _yCoord;
 
@@ -85,8 +85,11 @@ namespace MovieSearch.iOS.Controllers
 
         private UIButton createButton(string title)
         {
+            var centerX = this.View.Bounds.Width / 2;
+            var buttonWidth = this.View.Bounds.Width - 6*HorizontalMargin;
+
             var button = UIButton.FromType(UIButtonType.RoundedRect);
-            button.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 6 * HorizontalMargin, 50);
+            button.Frame = new CGRect(centerX - buttonWidth/2, this._yCoord, buttonWidth, 50);
             button.SetTitle(title, UIControlState.Normal);
             button.Font = (UIFont.FromName("HelveticaNeue-Bold", 12f));
 
@@ -106,12 +109,10 @@ namespace MovieSearch.iOS.Controllers
 
         public UITextField createTitleField()
         {
-            var centerX = this.View.Bounds.Width/2;
-            var buttonWidth = this.View.Bounds.Width - 2*HorizontalMargin;
-
+            
             UITextField textField = new UITextField()
             {
-                Frame = new CGRect(centerX - buttonWidth/2, this._yCoord, buttonWidth, 50),
+                Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2*HorizontalMargin, 50),
                 BorderStyle = UITextBorderStyle.RoundedRect,
                 Placeholder = "Enter a title..."
             };
