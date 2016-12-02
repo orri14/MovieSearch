@@ -52,9 +52,14 @@ namespace MovieSearch.iOS.Controllers
 
                 var results = await _apiService.getTopRatedMovies();
                 _movieList.AddRange(results);
+
+                this.TableView.ReloadData();
+                activitySpinner.StopAnimating();
+
+                this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
             }
 
-            this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
+            this._reload = false;
         }
 
         public override void ViewDidDisappear(bool animated)
