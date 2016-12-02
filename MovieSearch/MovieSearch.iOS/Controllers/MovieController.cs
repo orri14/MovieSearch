@@ -43,7 +43,8 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, VerticalStep, this.View.Bounds.Width, VerticalStep)
+                Frame = new CGRect(HorizontalMargin, VerticalStep, this.View.Bounds.Width, VerticalStep),
+                Text = _movieInfo.title + " (" + _movieInfo.year + " )"
             };
             
             return label;
@@ -53,8 +54,18 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, VerticalStep*2, this.View.Bounds.Width, VerticalStep)
+                Frame = new CGRect(HorizontalMargin, VerticalStep * 2, this.View.Bounds.Width, VerticalStep),
+                Text = _movieInfo.duration + " | "
             };
+
+            int numOfGenres = _movieInfo.genres.Count;
+
+            for (int i = 0; i < numOfGenres; i++)
+            {
+                label.Text += _movieInfo.genres[i];
+                label.Text += (i == numOfGenres - 1 ? "" : ", ");
+            }
+
 
             return label;
         }
@@ -63,7 +74,8 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin*5, VerticalStep, this.View.Bounds.Width, VerticalStep)
+                Frame = new CGRect(HorizontalMargin * 5, VerticalStep * 3, this.View.Bounds.Width, VerticalStep * 7),
+                Text = _movieInfo.description
             };
 
             return label;
