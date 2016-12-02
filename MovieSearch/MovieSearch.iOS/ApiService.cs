@@ -46,21 +46,16 @@ namespace MovieSearch.iOS
                 film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
                 film.description = info.Overview;
 
-                
-
                 var posterlink = info.PosterPath;
-                var localImagePath = downloader.LocalPathForFilename(posterlink);
+                var ImagePath = downloader.LocalPathForFilename(posterlink);
 
-                if (localImagePath != "")
+                if (ImagePath != "")
                 {
-                    await downloader.DownloadImage(posterlink, localImagePath, CancellationToken.None);
-                }
-                else
-                {
-                    localImagePath = "image_not_found.png";
+                    await downloader.DownloadImage(posterlink, ImagePath, CancellationToken.None);
                 }
 
-                film.imageName = localImagePath;
+
+                film.imageName = ImagePath;
 
                 List<string> genres = new List<string>();
 
@@ -85,8 +80,7 @@ namespace MovieSearch.iOS
                         }
                     }
                 }
-                
-                
+
                 film.cast = cast;
 
                 result.Add(film);
