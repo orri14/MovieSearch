@@ -106,7 +106,7 @@ namespace MovieSearch.iOS.Controllers
             UIImageView moviePoster = new UIImageView();
 
             moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
-            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, ((this.View.Bounds.Width / 2) - 10) * (15/20) );
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, ((this.View.Bounds.Width / 2) - 10) * (20/15) );
 
             return moviePoster;
         }
