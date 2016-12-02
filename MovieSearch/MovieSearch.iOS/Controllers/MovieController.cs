@@ -17,7 +17,7 @@ namespace MovieSearch.iOS.Controllers
 
         private const int StartY = 80;
 
-        private const int VerticalStep = 50;
+        private const int VerticalStep = 30;
 
         private int _yCoord;
 
@@ -64,7 +64,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin * 2, 50),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
                 Text = (_movieInfo.duration + " | "),
                 Font = UIFont.FromName("Helvetica", 8f),
                 TextColor = UIColor.White
@@ -89,9 +89,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(this.View.Frame.Width / 2, _yCoord, this.View.Frame.Width / 2 - HorizontalMargin, 70),
+                Frame = new CGRect(this.View.Frame.Width / 2, _yCoord, this.View.Bounds.Width / 2 - HorizontalMargin, 100),
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
+                Lines = 10,
                 Font = UIFont.FromName("Helvetica", 8f),
                 TextColor = UIColor.White
             };
