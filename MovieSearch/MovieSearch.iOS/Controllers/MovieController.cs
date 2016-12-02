@@ -44,6 +44,7 @@ namespace MovieSearch.iOS.Controllers
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
             this.View.AddSubview(descriptionLabel);
+            this.View.AddSubview(moviePoster);
         }
 
         private UILabel createTitleLabel()
@@ -65,7 +66,7 @@ namespace MovieSearch.iOS.Controllers
             UILabel label = new UILabel()
             {
                 Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
-                Text = (_movieInfo.duration + " min | "),
+                Text = _movieInfo.duration + " min | ",
                 Font = UIFont.FromName("Helvetica", 10f),
                 TextColor = UIColor.White
             };
