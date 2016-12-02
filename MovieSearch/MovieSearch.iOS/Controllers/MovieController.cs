@@ -33,19 +33,20 @@ namespace MovieSearch.iOS.Controllers
             this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0);
             this.Title = _movieInfo.title;
 
+            _yCoord = StartY;
+
             var titleLabel = this.createTitleLabel();
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
             var descriptionLabel = this.createDescriptionLabel();
-            var moviePoster = new UIImageView();
-            moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
-            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 70);
+            var moviePoster = this.createMoviePoster();
+            
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
             this.View.AddSubview(descriptionLabel);
         }
 
-        public UILabel createTitleLabel()
+        private UILabel createTitleLabel()
         {
             UILabel label = new UILabel()
             {
@@ -59,7 +60,7 @@ namespace MovieSearch.iOS.Controllers
             return label;
         }
 
-        public UILabel createDurationAndGenreLabel()
+        private UILabel createDurationAndGenreLabel()
         {
             UILabel label = new UILabel()
             {
@@ -84,7 +85,7 @@ namespace MovieSearch.iOS.Controllers
             return label;
         }
 
-        public UILabel createDescriptionLabel()
+        private UILabel createDescriptionLabel()
         {
             UILabel label = new UILabel()
             {
@@ -97,6 +98,17 @@ namespace MovieSearch.iOS.Controllers
 
             return label;
         }
+
+        private UIImageView createMoviePoster()
+        {
+            UIImageView moviePoster = new UIImageView();
+
+            moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 70);
+
+            return moviePoster;
+        }
+
 
     }
 }
