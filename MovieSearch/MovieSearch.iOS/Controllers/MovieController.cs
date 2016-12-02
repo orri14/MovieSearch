@@ -92,7 +92,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord + 40, this.View.Bounds.Width - HorizontalMargin * 2, 200),
+                Frame = new CGRect(HorizontalMargin, _yCoord + 40, this.View.Bounds.Width - HorizontalMargin * 2, 350),
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
                 Lines = 10,
