@@ -59,7 +59,7 @@ namespace MovieSearch.iOS.Controllers
                 this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
             }
 
-            this._reload = false;
+            this._reload = true;
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -78,8 +78,6 @@ namespace MovieSearch.iOS.Controllers
             this.NavigationController.PushViewController(new MovieController(this._movieList[row]), true);
             this._reload = false;
         }
-
-      
 
     }
 }
