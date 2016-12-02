@@ -52,7 +52,7 @@ namespace MovieSearch.iOS.Controllers
             {
                 Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
                 Text = _movieInfo.title + " (" + _movieInfo.year + " )",
-                Font = UIFont.FromName("HelveticaNeue-Bold", 12f),
+                Font = UIFont.FromName("HelveticaNeue-Bold", 16f),
                 TextColor = UIColor.White
             };
             _yCoord += VerticalStep;
@@ -66,7 +66,7 @@ namespace MovieSearch.iOS.Controllers
             {
                 Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
                 Text = (_movieInfo.duration + " | "),
-                Font = UIFont.FromName("Helvetica", 8f),
+                Font = UIFont.FromName("Helvetica", 10f),
                 TextColor = UIColor.White
             };
             
@@ -93,7 +93,7 @@ namespace MovieSearch.iOS.Controllers
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
                 Lines = 10,
-                Font = UIFont.FromName("Helvetica", 8f),
+                Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
             
