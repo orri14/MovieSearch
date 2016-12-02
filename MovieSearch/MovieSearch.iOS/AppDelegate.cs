@@ -21,17 +21,15 @@ namespace MovieSearch.iOS
             // create a new window instance based on the screen size
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var cvc = new SearchController();
-            var navController = new UINavigationController(cvc);
+            var searchController = new SearchController();
+            var searchNavController = new UINavigationController(searchController);
 
-		    var trc = new TopRatedListController();
-		    var topNavController = new UINavigationController(trc);
-		     
-            //HERE WE ADD THE OTHER CONTROLLER FOR TOP RATED MOVIES
+		    var topRatedController = new TopRatedListController();
+		    var topNavController = new UINavigationController(topRatedController);
 
 		    var tabBarController = new TabBarController()
 		    {
-		        ViewControllers = new UIViewController[] {navController, topNavController}
+		        ViewControllers = new UIViewController[] { searchNavController, topNavController}
 		    };
 
             Window.RootViewController = tabBarController;

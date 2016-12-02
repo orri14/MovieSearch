@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using DM.MovieApi.MovieDb.Movies;
 using MovieSearch.Model;
 
 namespace MovieSearch.iOS
@@ -59,7 +56,6 @@ namespace MovieSearch.iOS
             this._imageView.Image = UIImage.FromFile(info.imageName);
 
             this._titleLabel.Text = info.title + " (" + info.year + ")";
-
 
             this._actorsLabel.Text = "";
             int minNumOfAct = Math.Min(3, info.cast.Count);

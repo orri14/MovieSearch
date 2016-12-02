@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using CoreGraphics;
 using UIKit;
 using DM.MovieApi;
-using DM.MovieApi.ApiResponse;
-using DM.MovieApi.MovieDb.Movies;
 using MovieSearch.Model;
-using MovieDownload;
-using System.Net;
+
 
 
 namespace MovieSearch.iOS.Controllers
@@ -28,6 +23,7 @@ namespace MovieSearch.iOS.Controllers
         public SearchController()
         {
             this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
+            activitySpinner = new Spinner(this.View.Frame).activitySpinner;
         }
 
 
@@ -45,26 +41,11 @@ namespace MovieSearch.iOS.Controllers
 
             var searchButton = this.createButton("Search");
 
-
-            var centerX = this.View.Frame.Width / 2;
-            var centerY = this.View.Frame.Height / 2;
-
-            activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
-            activitySpinner.Frame = new CGRect(
-                centerX - activitySpinner.Frame.Width / 2,
-                centerY - activitySpinner.Frame.Height - 20,
-                activitySpinner.Frame.Width,
-                activitySpinner.Frame.Height);
-
-
             searchButton.TouchUpInside += async (sender, args) =>
             {
                 var apiService = new ApiService();
 
-
                 searchButton.Enabled = false;
-                activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
-                this.View.AddSubview(activitySpinner);
                 activitySpinner.StartAnimating();
 
                 MovieDbFactory.RegisterSettings(new MyDbSettings());
@@ -79,6 +60,8 @@ namespace MovieSearch.iOS.Controllers
                 searchButton.Enabled = true;
             };
 
+
+            this.View.AddSubview(activitySpinner);
             this.View.AddSubview(titleField);
             this.View.AddSubview(searchButton);
         }
