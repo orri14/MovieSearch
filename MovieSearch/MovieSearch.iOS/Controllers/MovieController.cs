@@ -13,11 +13,11 @@ namespace MovieSearch.iOS.Controllers
     {
         private FilmInfo _movieInfo;
 
-        private const int HorizontalMargin = 20;
+        private const int HorizontalMargin = 10;
 
-        private const int StartY = 80;
+        private const int StartY = 20;
 
-        private const int VerticalStep = 50;
+        private const int VerticalStep = 20;
 
         private int _yCoord;
 
@@ -30,7 +30,7 @@ namespace MovieSearch.iOS.Controllers
         {
             base.ViewDidLoad();
 
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0);
             this.Title = _movieInfo.title;
 
             var titleLabel = this.createTitleLabel();
@@ -38,7 +38,7 @@ namespace MovieSearch.iOS.Controllers
             var descriptionLabel = this.createDescriptionLabel();
             var moviePoster = new UIImageView();
             moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
-            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width, 50);
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 70);
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
@@ -49,8 +49,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Frame.Height - HorizontalMargin, 50),
-                Text = _movieInfo.title + " (" + _movieInfo.year + " )"
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 20),
+                Text = _movieInfo.title + " (" + _movieInfo.year + " )",
+                Font = UIFont.FromName("HelveticaNeue-Bold", 12f),
+                TextColor = UIColor.White
             };
             _yCoord += VerticalStep;
             
@@ -61,8 +63,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Frame.Height - HorizontalMargin, 50),
-                Text = _movieInfo.duration + " | "
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 20),
+                Text = (_movieInfo.duration + " | "),
+                Font = UIFont.FromName("HelveticaNeue-Bold", 10f),
+                TextColor = UIColor.White
             };
             
 
@@ -84,8 +88,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(this.View.Frame.Width / 2, _yCoord, this.View.Frame.Width / 2, 50),
-                Text = _movieInfo.description
+                Frame = new CGRect(this.View.Frame.Width / 2, _yCoord, this.View.Frame.Width / 2, 70),
+                Text = _movieInfo.description,
+                Font = UIFont.FromName("HelveticaNeue-Bold", 8f),
+                TextColor = UIColor.White
             };
             _yCoord += VerticalStep;
 
