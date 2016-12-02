@@ -12,14 +12,18 @@ namespace MovieSearch.iOS.Controllers
     class MovieController : UIViewController
     {
         private FilmInfo _movieInfo;
-        private nfloat HorizontalMargin;
-        private nfloat VerticalStep;
+
+        private const int HorizontalMargin = 20;
+
+        private const int StartY = 80;
+
+        private const int VerticalStep = 50;
+
+        private int _yCoord;
 
         public MovieController(FilmInfo info)
         {
             this._movieInfo = info;
-            this.HorizontalMargin = this.View.Bounds.Width / 10;
-            this.VerticalStep = this.View.Bounds.Height / 10;
         }
 
         public override void ViewDidLoad()
@@ -33,6 +37,8 @@ namespace MovieSearch.iOS.Controllers
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
             var descriptionLabel = this.createDescriptionLabel();
             var moviePoster = new UIImageView();
+            moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width, 50);
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
@@ -43,9 +49,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, VerticalStep, HorizontalMargin * 8, VerticalStep),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Frame.Height - HorizontalMargin, 50),
                 Text = _movieInfo.title + " (" + _movieInfo.year + " )"
             };
+            _yCoord += VerticalStep;
             
             return label;
         }
@@ -54,9 +61,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, VerticalStep * 2, HorizontalMargin * 8, VerticalStep),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Frame.Height - HorizontalMargin, 50),
                 Text = _movieInfo.duration + " | "
             };
+            
 
             int numOfGenres = _movieInfo.genres.Count;
 
@@ -66,6 +74,8 @@ namespace MovieSearch.iOS.Controllers
                 label.Text += (i == numOfGenres - 1 ? "" : ", ");
             }
 
+            _yCoord += VerticalStep;
+
 
             return label;
         }
@@ -74,9 +84,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin * 5, VerticalStep * 3, HorizontalMargin * 4, VerticalStep * 7),
+                Frame = new CGRect(this.View.Frame.Width / 2, _yCoord, this.View.Frame.Width / 2, 50),
                 Text = _movieInfo.description
             };
+            _yCoord += VerticalStep;
 
             return label;
         }
