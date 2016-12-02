@@ -17,9 +17,9 @@ namespace MovieSearch.iOS.Controllers
     {
         private const int HorizontalMargin = 20;
 
-        private const int StartY = 80;
+        private const int StartY = 150;
 
-        private const int StepY = 50;
+        private const int StepY = 80;
 
         private int _yCoord;
 
