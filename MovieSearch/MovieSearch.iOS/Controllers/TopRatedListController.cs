@@ -29,7 +29,7 @@ namespace MovieSearch.iOS.Controllers
         {
             base.ViewDidLoad();
             this.Title = "Top Rated";
-            this.View.BackgroundColor = UIColor.Black;
+            this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0);
         }
 
         public override async void  ViewDidAppear(bool animated) 
