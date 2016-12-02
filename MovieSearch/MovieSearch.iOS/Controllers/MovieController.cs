@@ -37,7 +37,6 @@ namespace MovieSearch.iOS.Controllers
 
             var titleLabel = this.createTitleLabel();
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
-            var actorsLabel = this.createActorsLabel();
             var moviePoster = this.createMoviePoster();
             var descriptionLabel = this.createDescriptionLabel();
             
@@ -45,7 +44,6 @@ namespace MovieSearch.iOS.Controllers
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
-            this.View.AddSubview(actorsLabel);
             this.View.AddSubview(moviePoster);
             this.View.AddSubview(descriptionLabel);
             
@@ -55,7 +53,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 30),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 20),
                 Text = _movieInfo.title + " (" + _movieInfo.year + ")",
                 Font = UIFont.FromName("HelveticaNeue-Bold", 16f),
                 TextColor = UIColor.FromRGB(218, 165, 32)
@@ -69,7 +67,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 20),
                 Text = _movieInfo.duration + " min | ",
                 Font = UIFont.FromName("Helvetica", 10f),
                 TextColor = UIColor.White
@@ -90,38 +88,14 @@ namespace MovieSearch.iOS.Controllers
             return label;
         }
 
-        private UILabel createActorsLabel()
-        {
-            UILabel label = new UILabel()
-            {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
-                Text = _movieInfo.duration + "",
-                Font = UIFont.FromName("Helvetica", 10f),
-                TextColor = UIColor.White
-            };
-
-
-            int numOfActors = Math.Min(5, _movieInfo.cast.Count);
-
-            for (int i = 0; i < numOfActors; i++)
-            {
-                label.Text += _movieInfo.cast[i];
-                label.Text += (i == numOfActors - 1 ? "" : ", ");
-            }
-
-            _yCoord += VerticalStep;
-
-            return label;
-        }
-
         private UILabel createDescriptionLabel()
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin * 2, this.View.Bounds.Height - 20),
+                Frame = new CGRect(HorizontalMargin, _yCoord + 50, this.View.Bounds.Width - HorizontalMargin * 2, 400),
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
-                Lines = 15,
+                Lines = 10,
                 Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
@@ -135,7 +109,7 @@ namespace MovieSearch.iOS.Controllers
             UIImageView moviePoster = new UIImageView();
 
             moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
-            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, ((this.View.Bounds.Width / 2) - 10) * (20/15));
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, 150, 200);
 
             _yCoord += VerticalStep;
 
