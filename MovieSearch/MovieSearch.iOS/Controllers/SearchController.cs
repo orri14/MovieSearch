@@ -96,7 +96,7 @@ namespace MovieSearch.iOS.Controllers
             button.Layer.CornerRadius = 6f;
             button.Layer.BorderWidth = 0.5f;
 
-            button.BackgroundColor = UIColor.LightGray;
+            button.BackgroundColor = UIColor.White;
 
 
             button.SetTitleColor(UIColor.Orange, forState: UIControlState.Normal);
