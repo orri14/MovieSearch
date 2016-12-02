@@ -45,7 +45,7 @@ namespace MovieSearch.iOS.Controllers
                 activitySpinner.StartAnimating();
 
                 var results = await _apiService.getTopRatedMovies();
-                _downloader.downloadPosters(results);
+                results = await _downloader.downloadPosters(results);
 
                 _movieList.AddRange(results);
 

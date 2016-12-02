@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using MovieDownload;
 using MovieSearch.Model;
 
@@ -14,7 +15,7 @@ namespace MovieSearch.iOS
             downloader = new ImageDownloader(new StorageClient());
         }
 
-        public async void downloadPosters(List<FilmInfo> movies)
+        public async Task<List<FilmInfo>> downloadPosters(List<FilmInfo> movies)
         {
             foreach (FilmInfo film in movies)
             {
@@ -29,6 +30,7 @@ namespace MovieSearch.iOS
 
                 film.imageName = ImagePath;
             }
+            return movies;
         }
     }
 }

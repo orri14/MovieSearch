@@ -59,7 +59,7 @@ namespace MovieSearch.iOS.Controllers
                 titleField.ResignFirstResponder();
 
                 List<FilmInfo> movies = await apiService.getMoviesByTitle(titleField.Text);
-                _downloader.downloadPosters(movies);
+                movies = await _downloader.downloadPosters(movies);
 
                 this.NavigationController.PushViewController(new MovieListController(movies), true);
 
