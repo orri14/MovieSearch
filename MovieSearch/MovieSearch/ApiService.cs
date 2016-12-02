@@ -1,24 +1,21 @@
-﻿/*using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
-using MovieDownload;
 using MovieSearch.Model;
 
-namespace MovieSearch.iOS
+namespace MovieSearch
 {
     public class ApiService
     {
         private IApiMovieRequest _movieApi;
-        private ImageDownloader downloader;
 
         public ApiService()
         {
             MovieDbFactory.RegisterSettings(new MyDbSettings());
             _movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
-            downloader = new ImageDownloader(new StorageClient());
         }
 
         public async Task<List<FilmInfo>> getMoviesByTitle(string title)
@@ -47,17 +44,9 @@ namespace MovieSearch.iOS
                     film.year = info.ReleaseDate.Year.ToString();
                     film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
                     film.description = info.Overview;
-                   
-                    var posterlink = info.PosterPath;
-                    var ImagePath = downloader.LocalPathForFilename(posterlink);
 
-                    if (ImagePath != "")
-                    {
-                        await downloader.DownloadImage(posterlink, ImagePath, CancellationToken.None);
-                    }
-
-
-                    film.imageName = ImagePath;
+                    film.imageName = info.PosterPath;
+                    
 
                     List<string> genres = new List<string>();
 
@@ -97,4 +86,4 @@ namespace MovieSearch.iOS
             return result;
         }
     }
-}*/
+}

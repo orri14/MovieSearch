@@ -19,7 +19,9 @@ namespace MovieSearch.iOS.Controllers
 
         private int _yCoord;
 
-        UIActivityIndicatorView activitySpinner;
+        private UIActivityIndicatorView activitySpinner;
+
+        private PosterDownloadService downloader;
 
         public SearchController()
         {
@@ -55,6 +57,7 @@ namespace MovieSearch.iOS.Controllers
                 titleField.ResignFirstResponder();
 
                 List<FilmInfo> movies = await apiService.getMoviesByTitle(titleField.Text);
+                downloader.downloadPosters(movies);
 
                 this.NavigationController.PushViewController(new MovieListController(movies), true);
 
