@@ -45,6 +45,8 @@ namespace MovieSearch.iOS
                 film.imageName = "interstellar";
 
                 List<string> genres = new List<string>();
+
+               
                 foreach (var genre in info.Genres)
                 {
                     genres.Add(genre.ToString());
@@ -54,10 +56,15 @@ namespace MovieSearch.iOS
                 ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
 
                 List<string> cast = new List<string>();
-                foreach (var actor in credits.Item.CastMembers)
+
+                if (credits.Item.CastMembers != null)
                 {
-                    cast.Add(actor.Name);
+                    foreach (var actor in credits.Item.CastMembers)
+                    {
+                        cast.Add(actor.Name);
+                    }
                 }
+                
                 film.cast = cast;
 
                 result.Add(film);
