@@ -29,16 +29,11 @@ namespace MovieSearch.iOS.Controllers
                 activitySpinner.Frame.Height);
         }
 
-        public override void  ViewDidLoad() 
+        public override async void  ViewDidLoad() 
         {
             base.ViewDidLoad();
             this.Title = "Top Rated";
-            this.View.BackgroundColor = UIColor.Black;   
-        }
-
-        public override async void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
+            this.View.BackgroundColor = UIColor.Black;
 
             activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
             this.View.AddSubview(activitySpinner);
@@ -48,13 +43,18 @@ namespace MovieSearch.iOS.Controllers
 
             _movieList = await apiService.getTopRatedMovies();
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
-            activitySpinner.StopAnimating();
-
         }
 
         private void OnSelectedMovie(int row)
         {
             this.NavigationController.PushViewController(new MovieController(this._movieList[row]), true);
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+
         }
 
     }
