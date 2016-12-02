@@ -70,7 +70,7 @@ namespace MovieSearch.iOS
                 this._actorsLabel.Text += ((info.cast[i] == null) || (i == 2)) ? "" : ", ";
             }
             
-            this._ratingLabel.Text = info.rating;
+            this._ratingLabel.Text = "* " + info.rating;
 
             this.Accessory = UITableViewCellAccessory.DisclosureIndicator;
         }
