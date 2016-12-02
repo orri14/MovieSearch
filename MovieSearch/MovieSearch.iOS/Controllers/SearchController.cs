@@ -21,11 +21,13 @@ namespace MovieSearch.iOS.Controllers
 
         private UIActivityIndicatorView activitySpinner;
 
-        private PosterDownloadService downloader;
+        private PosterDownloadService _downloader;
 
         public SearchController()
         {
-            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);     
+            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
+            _downloader = new PosterDownloadService();
+                 
         }
 
 
@@ -57,7 +59,7 @@ namespace MovieSearch.iOS.Controllers
                 titleField.ResignFirstResponder();
 
                 List<FilmInfo> movies = await apiService.getMoviesByTitle(titleField.Text);
-                downloader.downloadPosters(movies);
+                _downloader.downloadPosters(movies);
 
                 this.NavigationController.PushViewController(new MovieListController(movies), true);
 

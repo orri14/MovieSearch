@@ -14,7 +14,7 @@ namespace MovieSearch.iOS.Controllers
         private List<FilmInfo> _movieList;
         private bool _reload;
         private ApiService _apiService;
-        private PosterDownloadService downloader;
+        private PosterDownloadService _downloader;
 
         private UIActivityIndicatorView activitySpinner;
         
@@ -25,6 +25,8 @@ namespace MovieSearch.iOS.Controllers
             _movieList = new List<FilmInfo>();
             _reload = true;
             _apiService = new ApiService();
+            _downloader = new PosterDownloadService();
+
         }
 
         public override void ViewDidLoad()
@@ -43,7 +45,7 @@ namespace MovieSearch.iOS.Controllers
                 activitySpinner.StartAnimating();
 
                 var results = await _apiService.getTopRatedMovies();
-                downloader.downloadPosters(results);
+                _downloader.downloadPosters(results);
 
                 _movieList.AddRange(results);
 
