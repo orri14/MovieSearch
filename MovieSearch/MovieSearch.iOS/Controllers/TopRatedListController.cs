@@ -16,7 +16,7 @@ namespace MovieSearch.iOS.Controllers
 
         public TopRatedListController()
         {
-            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Favorites, 1);
+            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.TopRated, 1);
         }
 
         public override async void  ViewDidLoad() 
