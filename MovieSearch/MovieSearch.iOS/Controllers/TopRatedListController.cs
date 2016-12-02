@@ -3,6 +3,7 @@ using CoreGraphics;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
+using MovieSearch.iOS.Views;
 using MovieSearch.Model;
 using UIKit;
 
