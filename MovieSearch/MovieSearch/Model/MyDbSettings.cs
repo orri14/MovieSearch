@@ -16,8 +16,6 @@ namespace MovieSearch
             {
                 string key = "214da67793e3bbe4c504e678b40e82aa";
                 return key;
-
-                throw new NotImplementedException();
             }
         }
 
@@ -27,8 +25,6 @@ namespace MovieSearch
             {
                 string url = "http://api.themoviedb.org/3/";
                 return url;
-
-                throw new NotImplementedException();
             }
         }
     }

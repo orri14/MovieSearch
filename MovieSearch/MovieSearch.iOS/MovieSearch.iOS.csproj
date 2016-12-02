@@ -143,7 +143,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiService.cs" />
     <Compile Include="Controllers\TabBarController.cs" />
+    <Compile Include="Controllers\TopRatedListController.cs" />
     <Compile Include="Views\CustomCell.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\MovieListSource.cs" />
