@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using UIKit;
-
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
@@ -36,23 +35,21 @@ namespace MovieSearch.iOS.Controllers
         {
             base.ViewDidLoad();
 
-            this.Title = "Movie Search";
+            this.Title = "Search";
 
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.FromRGB(70, 0, 0); ;
 
             this._yCoord = StartY;
 
-            var prompt = this.createPrompt();
-
             var titleField = this.createTitleField();
 
-            var searchButton = this.createButton("Search Movie");
+            var searchButton = this.createButton("Search");
 
 
             var centerX = this.View.Frame.Width / 2;
             var centerY = this.View.Frame.Height / 2;
 
-            activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
+            activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
             activitySpinner.Frame = new CGRect(
                 centerX - activitySpinner.Frame.Width / 2,
                 centerY - activitySpinner.Frame.Height - 20,
@@ -67,7 +64,8 @@ namespace MovieSearch.iOS.Controllers
                 activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
                 this.View.AddSubview(activitySpinner);
                 activitySpinner.StartAnimating();
-                
+
+                MovieDbFactory.RegisterSettings(new MyDbSettings());
 
                 MovieDbFactory.RegisterSettings("214da67793e3bbe4c504e678b40e82aa", "http://api.themoviedb.org/3/");
 
@@ -98,11 +96,16 @@ namespace MovieSearch.iOS.Controllers
 
                     ApiQueryResponse<MovieCredit> credits = await movieApi.GetCreditsAsync(info.Id);
 
+
                     List<string> cast = new List<string>();
-                    foreach (var actor in credits.Item.CastMembers)
-                    {
-                        cast.Add(actor.Name);
+                    if (credits.Item.CastMembers != null)
+                    { 
+                        foreach (var actor in credits.Item.CastMembers)
+                        {
+                            cast.Add(actor.Name);
+                        }
                     }
+
                     film.cast = cast;
 
                     movies.Add(film);
@@ -114,7 +117,6 @@ namespace MovieSearch.iOS.Controllers
                 searchButton.Enabled = true;
             };
 
-            this.View.AddSubview(prompt);
             this.View.AddSubview(titleField);
             this.View.AddSubview(searchButton);
         }
@@ -124,6 +126,9 @@ namespace MovieSearch.iOS.Controllers
             var button = UIButton.FromType(UIButtonType.RoundedRect);
             button.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
             button.SetTitle(title, UIControlState.Normal);
+            button.Font = (UIFont.FromName("HelveticaNeue-Bold", 12f));
+            button.SetTitleColor(UIColor.FromRGB(218, 165, 32), forState: UIControlState.Normal);
+            button.SetTitleColor(UIColor.DarkGray, forState: UIControlState.Disabled);
             this._yCoord += StepY;
             return button; 
         }
@@ -132,7 +137,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50)
+                Frame = new CGRect(HorizontalMargin, (this.View.Bounds.Height / 2), this.View.Bounds.Width, 50)
             };
             this._yCoord += StepY;
 
@@ -144,25 +149,13 @@ namespace MovieSearch.iOS.Controllers
         {
             UITextField textField = new UITextField()
             {
-                Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
+                Frame = new CGRect(HorizontalMargin, (this.View.Bounds.Height / 2), this.View.Bounds.Width - 2 * HorizontalMargin, 50),
                 BorderStyle = UITextBorderStyle.RoundedRect,
-                Placeholder = "Djöflaeyjan"
+                Placeholder = "Enter a title..."
             };
             this._yCoord += StepY;
 
             return textField;
-        }
-
-        public UILabel createPrompt()
-        {
-            UILabel label = new UILabel()
-            {
-                Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50),
-                Text = "Enter words in movie title: "
-            };
-            this._yCoord += StepY;
-
-            return label;
         }
     }
 }
