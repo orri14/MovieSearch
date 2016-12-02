@@ -90,7 +90,7 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width / 2 - HorizontalMargin, 800),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width / 2 - HorizontalMargin, this.View.Bounds.Height),
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
                 Lines = 15,
@@ -106,7 +106,7 @@ namespace MovieSearch.iOS.Controllers
             UIImageView moviePoster = new UIImageView();
 
             moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
-            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, this.View.Frame.Height);
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, ((this.View.Bounds.Width / 2) - 10) * (15/20) );
 
             return moviePoster;
         }
