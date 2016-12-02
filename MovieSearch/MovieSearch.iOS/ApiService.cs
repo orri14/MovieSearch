@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
+using MovieDownload;
 using MovieSearch.Model;
 
 namespace MovieSearch.iOS
@@ -10,11 +12,13 @@ namespace MovieSearch.iOS
     public class ApiService
     {
         private IApiMovieRequest _movieApi;
+        private ImageDownloader downloader;
 
         public ApiService()
         {
             MovieDbFactory.RegisterSettings(new MyDbSettings());
             _movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
+            downloader = new ImageDownloader(new StorageClient());
         }
 
         public async Task<List<FilmInfo>> getMoviesByTitle(string title)
@@ -42,7 +46,21 @@ namespace MovieSearch.iOS
                 film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
                 film.description = info.Overview;
 
-                film.imageName = "interstellar";
+                
+
+                var posterlink = info.PosterPath;
+                var localImagePath = downloader.LocalPathForFilename(posterlink);
+
+                if (localImagePath != "")
+                {
+                    await downloader.DownloadImage(posterlink, localImagePath, CancellationToken.None);
+                }
+                else
+                {
+                    localImagePath = "image_not_found.png";
+                }
+
+                film.imageName = localImagePath;
 
                 List<string> genres = new List<string>();
 
