@@ -17,6 +17,13 @@ namespace MovieSearch.iOS.Controllers
         public TopRatedListController()
         {
             this.TabBarItem = new UITabBarItem(UITabBarSystemItem.TopRated, 1);
+        }
+
+        public override async void  ViewDidLoad() 
+        {
+            base.ViewDidLoad();
+            this.Title = "Top Rated";
+            this.View.BackgroundColor = UIColor.Black;
 
             var centerX = this.View.Frame.Width / 2;
             var centerY = this.View.Frame.Height / 2;
@@ -27,13 +34,6 @@ namespace MovieSearch.iOS.Controllers
                 centerY - activitySpinner.Frame.Height - 20,
                 activitySpinner.Frame.Width,
                 activitySpinner.Frame.Height);
-        }
-
-        public override async void  ViewDidLoad() 
-        {
-            base.ViewDidLoad();
-            this.Title = "Top Rated";
-            this.View.BackgroundColor = UIColor.Black;
 
             activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
             this.View.AddSubview(activitySpinner);
