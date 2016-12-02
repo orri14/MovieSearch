@@ -144,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiService.cs" />
-    <Compile Include="Controllers\ActSpinner.cs" />
     <Compile Include="Controllers\Spinner.cs" />
     <Compile Include="Controllers\TabBarController.cs" />
     <Compile Include="Controllers\TopRatedListController.cs" />
