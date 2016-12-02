@@ -51,7 +51,7 @@ namespace MovieSearch.iOS.Controllers
             UILabel label = new UILabel()
             {
                 Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width - HorizontalMargin, 50),
-                Text = _movieInfo.title + " (" + _movieInfo.year + " )",
+                Text = _movieInfo.title + " (" + _movieInfo.year + ")",
                 Font = UIFont.FromName("HelveticaNeue-Bold", 16f),
                 TextColor = UIColor.FromRGB(218, 165, 32)
             };
@@ -79,7 +79,7 @@ namespace MovieSearch.iOS.Controllers
                 label.Text += (i == numOfGenres - 1 ? "" : ", ");
             }
 
-            _yCoord += VerticalStep + 60;
+            _yCoord += VerticalStep + 10;
 
 
             return label;
@@ -89,10 +89,10 @@ namespace MovieSearch.iOS.Controllers
         {
             UILabel label = new UILabel()
             {
-                Frame = new CGRect(this.View.Frame.Width / 2, _yCoord, this.View.Bounds.Width / 2 - HorizontalMargin, 400),
+                Frame = new CGRect(HorizontalMargin, _yCoord, this.View.Bounds.Width / 2 - HorizontalMargin, 800),
                 Text = _movieInfo.description,
                 LineBreakMode = UILineBreakMode.WordWrap,
-                Lines = 10,
+                Lines = 15,
                 Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
@@ -105,7 +105,7 @@ namespace MovieSearch.iOS.Controllers
             UIImageView moviePoster = new UIImageView();
 
             moviePoster.Image = UIImage.FromFile(_movieInfo.imageName);
-            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, 400);
+            moviePoster.Frame = new CGRect(HorizontalMargin, _yCoord, (this.View.Bounds.Width / 2) - 10, this.View.Frame.Height);
 
             return moviePoster;
         }
