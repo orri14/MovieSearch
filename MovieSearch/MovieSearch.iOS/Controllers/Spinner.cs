@@ -2,7 +2,7 @@
 using CoreGraphics;
 using UIKit;
 
-namespace MovieSearch.Model
+namespace MovieSearch.iOS.Controllers
 {
     public class Spinner
     {
