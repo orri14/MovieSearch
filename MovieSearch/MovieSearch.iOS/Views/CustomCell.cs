@@ -47,9 +47,9 @@ namespace MovieSearch.iOS
         {
             base.LayoutSubviews();
 
-            this._imageView.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 10, 25);
-            this._titleLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._actorsLabel.Frame = new CGRect(5, 25, this.ContentView.Bounds.Width, 20);
+            this._imageView.Frame = new CGRect(5, 5, 33, 33);
+            this._titleLabel.Frame = new CGRect(45, 5, this.ContentView.Bounds.Width - 60, 25);
+            this._actorsLabel.Frame = new CGRect(45, 25, this.ContentView.Bounds.Width-60, 20);
             this._ratingLabel.Frame = new CGRect(this.ContentView.Bounds.Width - 10, 10, 5, 25);
         }
 
