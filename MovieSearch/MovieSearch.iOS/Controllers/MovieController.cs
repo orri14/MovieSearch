@@ -37,14 +37,16 @@ namespace MovieSearch.iOS.Controllers
 
             var titleLabel = this.createTitleLabel();
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
-            var descriptionLabel = this.createDescriptionLabel();
             var moviePoster = this.createMoviePoster();
+            var descriptionLabel = this.createDescriptionLabel();
+            
             
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
-            this.View.AddSubview(descriptionLabel);
             this.View.AddSubview(moviePoster);
+            this.View.AddSubview(descriptionLabel);
+            
         }
 
         private UILabel createTitleLabel()
