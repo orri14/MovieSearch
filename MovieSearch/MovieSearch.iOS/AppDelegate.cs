@@ -24,11 +24,20 @@ namespace MovieSearch.iOS
             var cvc = new SearchController();
             var navController = new UINavigationController(cvc);
 
-            Window.RootViewController = navController;
+		    var trc = new TopRatedListController();
+		    var topNavController = new UINavigationController(trc);
+		     
+            //HERE WE ADD THE OTHER CONTROLLER FOR TOP RATED MOVIES
+
+		    var tabBarController = new TabBarController()
+		    {
+		        ViewControllers = new UIViewController[] {navController, topNavController}
+		    };
+
+            Window.RootViewController = tabBarController;
             
             // make the window visible
             Window.MakeKeyAndVisible();
-
             return true;
         }
 

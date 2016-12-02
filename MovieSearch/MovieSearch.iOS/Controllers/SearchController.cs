@@ -62,24 +62,26 @@ namespace MovieSearch.iOS.Controllers
 
             searchButton.TouchUpInside += async (sender, args) =>
             {
+                var apiService = new ApiService();
+
 
                 searchButton.Enabled = false;
                 activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
                 this.View.AddSubview(activitySpinner);
                 activitySpinner.StartAnimating();
                 
-
-                MovieDbFactory.RegisterSettings("214da67793e3bbe4c504e678b40e82aa", "http://api.themoviedb.org/3/");
+                
+                
+                //MovieDbFactory.RegisterSettings("214da67793e3bbe4c504e678b40e82aa", "http://api.themoviedb.org/3/");
 
                 titleField.ResignFirstResponder();
 
-                var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
+                //var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
+                //ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(titleField.Text);
 
-                ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(titleField.Text);
-
-                List<FilmInfo> movies = new List<FilmInfo>();
+                List<FilmInfo> movies = await apiService.getMoviesByTitle(titleField.Text);
                 
-                foreach(MovieInfo info in response.Results)
+                /*foreach(MovieInfo info in response.Results)
                 {
                     FilmInfo film = new FilmInfo();
                     film.title = info.Title;
@@ -106,7 +108,7 @@ namespace MovieSearch.iOS.Controllers
                     film.cast = cast;
 
                     movies.Add(film);
-                }
+                }*/
 
                 this.NavigationController.PushViewController(new MovieListController(movies), true);
 
