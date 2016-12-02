@@ -38,54 +38,56 @@ namespace MovieSearch.iOS
         {
             List<FilmInfo> result = new List<FilmInfo>();
 
-            foreach (MovieInfo info in response.Results)
+            if (response.Results != null)
             {
-                FilmInfo film = new FilmInfo();
-                film.title = info.Title;
-                film.year = info.ReleaseDate.Year.ToString();
-                film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
-                film.description = info.Overview;
-
-                var posterlink = info.PosterPath;
-                var ImagePath = downloader.LocalPathForFilename(posterlink);
-
-                if (ImagePath != "")
+                foreach (MovieInfo info in response.Results)
                 {
-                    await downloader.DownloadImage(posterlink, ImagePath, CancellationToken.None);
-                }
+                    FilmInfo film = new FilmInfo();
+                    film.title = info.Title;
+                    film.year = info.ReleaseDate.Year.ToString();
+                    film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
+                    film.description = info.Overview;
 
+                    var posterlink = info.PosterPath;
+                    var ImagePath = downloader.LocalPathForFilename(posterlink);
 
-                film.imageName = ImagePath;
-
-                List<string> genres = new List<string>();
-
-               
-                foreach (var genre in info.Genres)
-                {
-                    genres.Add(genre.ToString());
-                }
-                film.genres = genres;
-
-                ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
-
-                List<string> cast = new List<string>();
-
-                if (credits.Item != null)
-                {
-                    if (credits.Item.CastMembers != null)
+                    if (ImagePath != "")
                     {
-                        foreach (var actor in credits.Item.CastMembers)
+                        await downloader.DownloadImage(posterlink, ImagePath, CancellationToken.None);
+                    }
+
+
+                    film.imageName = ImagePath;
+
+                    List<string> genres = new List<string>();
+
+
+                    foreach (var genre in info.Genres)
+                    {
+                        genres.Add(genre.ToString());
+                    }
+                    film.genres = genres;
+
+                    ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
+
+                    List<string> cast = new List<string>();
+
+                    if (credits.Item != null)
+                    {
+                        if (credits.Item.CastMembers != null)
                         {
-                            cast.Add(actor.Name);
+                            foreach (var actor in credits.Item.CastMembers)
+                            {
+                                cast.Add(actor.Name);
+                            }
                         }
                     }
+
+                    film.cast = cast;
+
+                    result.Add(film);
                 }
-
-                film.cast = cast;
-
-                result.Add(film);
             }
-
             return result;
         }
     }
