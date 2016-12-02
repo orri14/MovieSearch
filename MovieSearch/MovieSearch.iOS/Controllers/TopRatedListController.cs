@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-using CoreGraphics;
-using DM.MovieApi;
-using DM.MovieApi.ApiResponse;
-using DM.MovieApi.MovieDb.Movies;
 using MovieSearch.iOS.Views;
 using MovieSearch.Model;
 using UIKit;
@@ -26,7 +22,6 @@ namespace MovieSearch.iOS.Controllers
             _reload = true;
             _apiService = new ApiService();
             _downloader = new PosterDownloadService();
-
         }
 
         public override void ViewDidLoad()

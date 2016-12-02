@@ -1,5 +1,4 @@
-﻿using System;
-using DM.MovieApi;
+﻿using DM.MovieApi;
 
 
 namespace MovieSearch

@@ -1,8 +1,4 @@
-﻿using DM.MovieApi.MovieDb.Movies;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UIKit;
+﻿using UIKit;
 using MovieSearch.Model;
 using CoreGraphics;
 
@@ -40,8 +36,6 @@ namespace MovieSearch.iOS.Controllers
             var moviePoster = this.createMoviePoster();
             var descriptionLabel = this.createDescriptionLabel();
             
-            
-
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
             this.View.AddSubview(moviePoster);
@@ -84,7 +78,6 @@ namespace MovieSearch.iOS.Controllers
 
             _yCoord += VerticalStep;
 
-
             return label;
         }
 
@@ -99,8 +92,7 @@ namespace MovieSearch.iOS.Controllers
                 Font = UIFont.FromName("Helvetica", 12f),
                 TextColor = UIColor.White
             };
-            
-
+           
             return label;
         }
 

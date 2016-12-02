@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
@@ -47,9 +46,7 @@ namespace MovieSearch
 
                     film.imageName = info.PosterPath;
                     
-
                     List<string> genres = new List<string>();
-
 
                     foreach (var genre in info.Genres)
                     {

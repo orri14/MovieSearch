@@ -26,8 +26,7 @@ namespace MovieSearch.iOS.Controllers
         public SearchController()
         {
             this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
-            _downloader = new PosterDownloadService();
-                 
+            _downloader = new PosterDownloadService();    
         }
 
 
@@ -66,7 +65,6 @@ namespace MovieSearch.iOS.Controllers
                 activitySpinner.StopAnimating();
                 searchButton.Enabled = true;
             };
-
 
             this.View.AddSubview(activitySpinner);
             this.View.AddSubview(titleField);

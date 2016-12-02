@@ -35,8 +35,6 @@ namespace MovieSearch.iOS.Controllers
             }
             int row = indexPath.Row;
 
-            //Þurfti að breya þessu úr string í movielist.. gæti komið vitlaust út í appi
-
             cell.UpdateCell(this._movielist[row]);
 
             return cell;

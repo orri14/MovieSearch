@@ -143,7 +143,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiService.cs" />
     <Compile Include="PosterDownloadService.cs" />
     <Compile Include="Views\Spinner.cs" />
     <Compile Include="Controllers\TabBarController.cs" />
