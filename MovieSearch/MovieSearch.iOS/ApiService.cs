@@ -56,14 +56,13 @@ namespace MovieSearch.iOS
                 ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
 
                 List<string> cast = new List<string>();
-                if (credits != null)
+
+
+                if (credits.Item.CastMembers != null)
                 {
-                    if (credits.Item.CastMembers != null)
+                    foreach (var actor in credits.Item.CastMembers)
                     {
-                        foreach (var actor in credits.Item.CastMembers)
-                        {
-                            cast.Add(actor.Name);
-                        }
+                        cast.Add(actor.Name);
                     }
                 }
                 
