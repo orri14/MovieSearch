@@ -17,7 +17,7 @@ namespace MovieSearch.iOS.Controllers
 
         private const int StartY = 80;
 
-        private const int VerticalStep = 20;
+        private const int VerticalStep = 30;
 
         private int _yCoord;
 
@@ -37,16 +37,16 @@ namespace MovieSearch.iOS.Controllers
 
             var titleLabel = this.createTitleLabel();
             var durationAndGenreLabel = this.createDurationAndGenreLabel();
-            var moviePoster = this.createMoviePoster();
             var actorsLabel = this.createActorsLabel();
+            var moviePoster = this.createMoviePoster();
             var descriptionLabel = this.createDescriptionLabel();
             
             
 
             this.View.AddSubview(titleLabel);
             this.View.AddSubview(durationAndGenreLabel);
-            this.View.AddSubview(moviePoster);
             this.View.AddSubview(actorsLabel);
+            this.View.AddSubview(moviePoster);
             this.View.AddSubview(descriptionLabel);
             
         }
