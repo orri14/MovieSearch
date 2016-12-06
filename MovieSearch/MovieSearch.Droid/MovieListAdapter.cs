@@ -40,12 +40,13 @@ namespace MovieSearch.Droid
                 view = this._context.LayoutInflater.Inflate(Resource.Layout.MovieListItem, null);
             }
 
-            var person = this._movieList[position];
-            view.FindViewById<TextView>(Resource.Id.name).Text = person.Name;
-            view.FindViewById<TextView>(Resource.Id.year).Text = person.BirthYear.ToString();
+            var movie = this._movieList[position];
+            
+            view.FindViewById<TextView>(Resource.Id.titleText).Text = movie.title;
+            view.FindViewById<TextView>(Resource.Id.actorsText).Text = movie.year;
 
             var resourceId = this._context.Resources.GetIdentifier(
-                person.ImageName,
+                movie.imageName,
                 "drawable",
                 this._context.PackageName);
             view.FindViewById<ImageView>(Resource.Id.picture).SetBackgroundResource(resourceId);

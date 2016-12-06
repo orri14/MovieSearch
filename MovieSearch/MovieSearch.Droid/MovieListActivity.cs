@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MovieSearch.Model;
 using Newtonsoft.Json;
 
 
@@ -16,7 +17,7 @@ namespace MovieSearch.Droid
 {
     
     
-    [Activity(Theme = "@style/MyTheme", Label = "Movie list")]
+    [Activity(Label = "Movie list")]
     public class MovieListActivity : ListActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

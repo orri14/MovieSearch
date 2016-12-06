@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSearch.Droid", "MovieSearch\MovieSearch.Droid\MovieSearch.Droid.csproj", "{26CF2219-368B-4427-9298-A8B39086345E}"
 EndProject
@@ -14,6 +14,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		MovieDownload\MovieDownload.projitems*{16ae59a1-1ce6-4ede-a9df-afc9f975f33f}*SharedItemsImports = 4
+		MovieDownload\MovieDownload.projitems*{26cf2219-368b-4427-9298-a8b39086345e}*SharedItemsImports = 4
 		MovieDownload\MovieDownload.projitems*{8e0a00b1-d0e6-48f6-aa04-26171f002437}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
