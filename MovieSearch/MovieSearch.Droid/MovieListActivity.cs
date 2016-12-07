@@ -25,6 +25,7 @@ namespace MovieSearch.Droid
             base.OnCreate(savedInstanceState);
 
             var jsonStr = this.Intent.GetStringExtra("movieList");
+            jsonStr = jsonStr == null ? "" : jsonStr;
             var movieList = JsonConvert.DeserializeObject<List<FilmInfo>>(jsonStr);
             this.ListAdapter = new MovieListAdapter(this, movieList);
             // Create your application here
