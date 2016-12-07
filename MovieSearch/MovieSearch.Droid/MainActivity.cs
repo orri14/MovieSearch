@@ -12,11 +12,14 @@ using Newtonsoft.Json;
 using MovieSearch.Model;
 using System.Collections.Generic;
 using DM.MovieApi;
+using Android.Support.Design.Widget;
+using Android.Support.V4.App;
+using Android.Support.V4.View;
 
 namespace MovieSearch.Droid
 {
-	[Activity (Label = "MovieSearch.Droid", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
+    [Activity(Theme = "@style/MyTheme", Label = "MovieSearch.Droid", Icon = "@drawable/icon")]
+    public class MainActivity : FragmentActivity
 	{
 
         private PosterDownloadService _downloader;
@@ -30,15 +33,24 @@ namespace MovieSearch.Droid
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-			// Get our button from the layout resource,
-			// and attach an event to it
-			EditText titleSearch = this.FindViewById<EditText>(Resource.Id.titleSearchText);
+
+            var fragments = new Android.Support.V4.App.Fragment[]
+                               {
+                                    //new titleSearchFragment()
+                               
+                               };
+            var titles = CharSequence.ArrayFromStringArray(new[]
+                                                               {
+                                                                   "Search"
+                                                                   
+                                                               });
+
+            // Get our button from the layout resource,
+            // and attach an event to it
+            EditText titleSearch = this.FindViewById<EditText>(Resource.Id.titleSearchText);
             Button searchButton = this.FindViewById<Button>(Resource.Id.searchButton);
 
-
             
-
-
             searchButton.Click += async (sender, args) =>
             {
                 var apiService = new ApiService();
