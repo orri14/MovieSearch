@@ -15,10 +15,10 @@
         android:textColor="@android:color/white"
         android:id="@+id/titleText" />
     <ImageView
-      android:id="@+id/picture"
-      android:layout_width="133px"
-      android:layout_height="133px"
-      android:layout_alignParentRight="true" />
+        android:id="@+id/picture"
+        android:layout_width="133px"
+        android:layout_height="133px"
+        android:layout_alignParentRight="true" />
     <TextView
         android:text="Actors"
         android:layout_width="wrap_content"
