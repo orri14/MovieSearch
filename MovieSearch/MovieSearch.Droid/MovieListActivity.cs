@@ -25,7 +25,8 @@ namespace MovieSearch.Droid
             base.OnCreate(savedInstanceState);
             this.SetContentView(Resource.Layout.MovieList);
             
-            var jsonStr = this.Intent.GetStringExtra("movieList");
+            var jsonStr = this.Intent.GetStringExtra("MovieList");
+
             var movieList = JsonConvert.DeserializeObject<List<FilmInfo>>(jsonStr);
 
             var listview = this.FindViewById<ListView>(Resource.Id.movielistview);
