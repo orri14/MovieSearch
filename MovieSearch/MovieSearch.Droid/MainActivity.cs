@@ -9,7 +9,7 @@ namespace MovieSearch.Droid
     using Android.Support.V4.App;
     using Android.Support.V4.View;
 
-    [Activity(Theme = "@style/MyTheme", Label = "MovieSearch.Droid", Icon = "@drawable/icon", MainLauncher = true)]
+    [Activity(Theme = "@style/MyTheme", Label = "MovieSearch.Droid", Icon = "@drawable/icon")]
     public class MainActivity : FragmentActivity
     {
         protected override void OnCreate(Bundle bundle)
