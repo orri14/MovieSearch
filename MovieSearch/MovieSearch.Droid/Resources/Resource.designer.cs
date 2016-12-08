@@ -1812,11 +1812,14 @@ namespace MovieSearch.Droid
 			// aapt resource value: 0x7f02004d
 			public const int Icon = 2130837581;
 			
-			// aapt resource value: 0x7f02004f
-			public const int notification_template_icon_bg = 2130837583;
-			
 			// aapt resource value: 0x7f02004e
-			public const int Splash = 2130837582;
+			public const int interstellar = 2130837582;
+			
+			// aapt resource value: 0x7f020050
+			public const int notification_template_icon_bg = 2130837584;
+			
+			// aapt resource value: 0x7f02004f
+			public const int Splash = 2130837583;
 			
 			static Drawable()
 			{
@@ -2070,6 +2073,9 @@ namespace MovieSearch.Droid
 			
 			// aapt resource value: 0x7f060029
 			public const int pin = 2131099689;
+			
+			// aapt resource value: 0x7f06008b
+			public const int progressSpinner = 2131099787;
 			
 			// aapt resource value: 0x7f060006
 			public const int progress_circular = 2131099654;

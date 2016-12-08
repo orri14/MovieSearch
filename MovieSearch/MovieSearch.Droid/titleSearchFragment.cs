@@ -19,6 +19,8 @@ namespace MovieSearch.Droid
     public class TitleSearchFragment : Fragment
     {
         private ApiService _api;
+        private ProgressBar _spinner;
+        private PosterDownloadService _downloader;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -26,6 +28,7 @@ namespace MovieSearch.Droid
             //this._people = new People();
             _api = new ApiService();
             // Create your fragment here
+            _downloader = new PosterDownloadService();
 
         }
 
@@ -38,9 +41,16 @@ namespace MovieSearch.Droid
             EditText titleEditText = rootView.FindViewById<EditText>(Resource.Id.titleEditText);
             Button searchButton = rootView.FindViewById<Button>(Resource.Id.searchButton);
 
+            _spinner = rootView.FindViewById<ProgressBar>(Resource.Id.progressSpinner);
+            _spinner.Visibility = ViewStates.Invisible;
+
             searchButton.Click += async (object sender, EventArgs e) =>
             {
+                searchButton.Visibility = ViewStates.Gone;
+                _spinner.Visibility = ViewStates.Visible;
+
                 List<FilmInfo> movies = await _api.getMoviesByTitle(titleEditText.Text);
+                movies = await _downloader.downloadPosters(movies);
 
                 var intent = new Intent(this.Context, typeof(MovieListActivity));
                 intent.PutExtra("MovieList", JsonConvert.SerializeObject(movies));

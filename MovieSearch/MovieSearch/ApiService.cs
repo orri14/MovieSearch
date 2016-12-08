@@ -34,6 +34,11 @@ namespace MovieSearch
         {
             List<FilmInfo> result = new List<FilmInfo>();
 
+            if (response.Results.Count > 0)
+            {
+                int x = 4;
+            }
+
             if (response.Results != null)
             {
                 foreach (MovieInfo info in response.Results)
@@ -48,16 +53,28 @@ namespace MovieSearch
                     
                     List<string> genres = new List<string>();
 
-                    foreach (var genre in info.Genres)
+          
+                    if (info.Genres != null)
                     {
-                        genres.Add(genre.Name);
+                        foreach (var genre in info.Genres)
+                        {
+                            if (genre != null)
+                            {
+                                genres.Add(genre.Name);
+                            } 
+                        }
                     }
+                    
                     film.genres = genres;
 
                     //Get the movie duration
                     ApiQueryResponse<Movie> movie = await _movieApi.FindByIdAsync(info.Id);
-                    film.duration = movie.Item.Runtime.ToString();
 
+                    if (movie != null)
+                    {
+                        film.duration = movie.Item.Runtime.ToString();
+                    }
+                    
 
                     //Get the cast of a movie
                     ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);

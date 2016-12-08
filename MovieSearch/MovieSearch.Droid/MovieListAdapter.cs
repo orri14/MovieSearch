@@ -5,11 +5,13 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MovieSearch.Model;
+using Java.IO;
 
 
 namespace MovieSearch.Droid
@@ -45,11 +47,17 @@ namespace MovieSearch.Droid
             view.FindViewById<TextView>(Resource.Id.titleText).Text = movie.title;
             view.FindViewById<TextView>(Resource.Id.actorsText).Text = movie.year;
 
-            var resourceId = this._context.Resources.GetIdentifier(
-                movie.imageName,
+            /*var resourceId = this._context.Resources.GetIdentifier(
+                //movie.imageName,
+                "interstellar.jpg",
                 "drawable",
-                this._context.PackageName);
-            view.FindViewById<ImageView>(Resource.Id.picture).SetBackgroundResource(resourceId);
+                this._context.PackageName);*/
+
+            var file = new File(movie.imageName);
+            var bmimg = BitmapFactory.DecodeFile(file.AbsolutePath);
+            view.FindViewById<ImageView>(Resource.Id.picture).SetImageBitmap(bmimg);
+
+            //view.FindViewById<ImageView>(Resource.Id.picture).SetBackgroundResource(resourceId);
 
             return view;
         }
