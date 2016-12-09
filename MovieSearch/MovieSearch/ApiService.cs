@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
@@ -34,69 +35,77 @@ namespace MovieSearch
         {
             List<FilmInfo> result = new List<FilmInfo>();
 
-            if (response.Results.Count > 0)
+            try
             {
-                int x = 4;
-            }
-
-            if (response.Results != null)
-            {
-                foreach (MovieInfo info in response.Results)
+                if (response.Results != null)
                 {
-                    FilmInfo film = new FilmInfo();
-                    film.title = info.Title;
-                    film.year = info.ReleaseDate.Year.ToString();
-                    film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
-                    film.description = info.Overview;
-
-                    film.imageName = info.PosterPath;
-                    
-                    List<string> genres = new List<string>();
-
-          
-                    if (info.Genres != null)
+                    foreach (MovieInfo info in response.Results)
                     {
-                        foreach (var genre in info.Genres)
+                        FilmInfo film = new FilmInfo();
+                        film.title = info.Title;
+                        film.year = info.ReleaseDate.Year.ToString();
+                        film.rating = info.VoteAverage.ToString().Equals("0") ? "-" : info.VoteAverage.ToString();
+                        film.description = info.Overview;
+
+                        film.imageName = info.PosterPath;
+
+                        List<string> genres = new List<string>();
+
+
+                        if (info.Genres != null)
                         {
-                            if (genre != null)
+                            foreach (var genre in info.Genres)
                             {
-                                genres.Add(genre.Name);
-                            } 
-                        }
-                    }
-                    
-                    film.genres = genres;
-
-                    //Get the movie duration
-                    ApiQueryResponse<Movie> movie = await _movieApi.FindByIdAsync(info.Id);
-
-                    if (movie != null)
-                    {
-                        film.duration = movie.Item.Runtime.ToString();
-                    }
-                    
-
-                    //Get the cast of a movie
-                    ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
-
-                    List<string> cast = new List<string>();
-
-                    if (credits.Item != null)
-                    {
-                        if (credits.Item.CastMembers != null)
-                        {
-                            foreach (var actor in credits.Item.CastMembers)
-                            {
-                                cast.Add(actor.Name);
+                                if (genre != null)
+                                {
+                                    genres.Add(genre.Name);
+                                }
                             }
                         }
+
+                        film.genres = genres;
+
+                        //Get the movie duration
+                        ApiQueryResponse<Movie> movie = await _movieApi.FindByIdAsync(info.Id);
+
+                        if (movie != null)
+                        {
+                            film.duration = "";
+                            if (movie.Item.Runtime != null)
+                            {
+                                film.duration = movie.Item.Runtime.ToString();
+                            }                            
+                        }
+
+
+                        //Get the cast of a movie
+                        ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
+
+                        List<string> cast = new List<string>();
+
+                        if (credits.Item != null)
+                        {
+                            if (credits.Item.CastMembers != null)
+                            {
+                                foreach (var actor in credits.Item.CastMembers)
+                                {
+                                    cast.Add(actor.Name);
+                                }
+                            }
+                        }
+
+                        film.cast = cast;
+
+                        result.Add(film);
                     }
-
-                    film.cast = cast;
-
-                    result.Add(film);
                 }
             }
+            catch (Exception)
+            {
+                
+            }
+
+            
             return result;
         }
     }
