@@ -20,16 +20,11 @@ namespace MovieSearch.Droid
     {
         private ApiService _api;
         private ProgressBar _spinner;
-        private PosterDownloadService _downloader;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //this._people = new People();
             _api = new ApiService();
-            // Create your fragment here
-            _downloader = new PosterDownloadService();
-
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -50,7 +45,6 @@ namespace MovieSearch.Droid
                 _spinner.Visibility = ViewStates.Visible;
 
                 List<FilmInfo> movies = await _api.getMoviesByTitle(titleEditText.Text);
-                //movies = await _downloader.downloadPosters(movies);
 
                 var intent = new Intent(this.Context, typeof(MovieListActivity));
                 intent.PutExtra("MovieList", JsonConvert.SerializeObject(movies));

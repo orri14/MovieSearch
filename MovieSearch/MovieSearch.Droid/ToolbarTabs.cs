@@ -18,12 +18,16 @@ namespace MovieSearch.Droid
 
     public static class ToolbarTabs
     {
+        private static TopRatedFragment _topRatedFragment;
+
         public static void Construct(FragmentActivity activity, Toolbar toolbar)
         {
+            _topRatedFragment = new TopRatedFragment();
+
             var fragments = new Fragment[]
                                 {
                                     new TitleSearchFragment(),
-                                    new TopRatedFragment()
+                                    _topRatedFragment
                                 };
             var titles = CharSequence.ArrayFromStringArray(new[]
                                 {
@@ -37,6 +41,17 @@ namespace MovieSearch.Droid
             // Give the TabLayout the ViewPager
             var tabLayout = activity.FindViewById<TabLayout>(Resource.Id.sliding_tabs);
             tabLayout.SetupWithViewPager(viewPager);
+
+            tabLayout.TabSelected += async (sender, args) =>
+            {
+                viewPager.SetCurrentItem(args.Tab.Position, true);
+
+                var tab = args.Tab;
+                if (tab.Position == 1)
+                {
+                    await _topRatedFragment.downloadTopRated();
+                }
+            };
 
             SetToolbar(activity, toolbar);
         }

@@ -44,28 +44,27 @@ namespace MovieSearch.Droid
             }
 
             var movie = this._movieList[position];
-            
+
+            int minNumOfAct = Math.Min(3, movie.cast.Count);
+
+            string cast = "";
+
+            for (int i = 0; i < minNumOfAct; i++)
+            {
+                cast += (movie.cast[i] == null) ? "" : movie.cast[i];
+                cast += (i == 2) ? "" : ", ";
+            }
+
+
             view.FindViewById<TextView>(Resource.Id.titleText).Text = movie.title;
-            view.FindViewById<TextView>(Resource.Id.actorsText).Text = movie.year;
+            view.FindViewById<TextView>(Resource.Id.yearText).Text = movie.year;
+            view.FindViewById<TextView>(Resource.Id.actorsText).Text = cast;
 
-            /*var resourceId = this._context.Resources.GetIdentifier(
-                //movie.imageName,
-                "interstellar.jpg",
-                "drawable",
-                this._context.PackageName);*/
-            string ImageUrl = "http://image.tmdb.org/t/p/w92";
-
-            /*var file = new File(movie.imageName);
-            var bmimg = BitmapFactory.DecodeFile(file.AbsolutePath);
-            view.FindViewById<ImageView>(Resource.Id.picture).SetImageBitmap(bmimg);*/
+            string ImageUrl = "http://image.tmdb.org/t/p/w154";
 
             Picasso.With(this._context)
            .Load(String.Concat(ImageUrl, movie.imageName))
            .Into(view.FindViewById<ImageView>(Resource.Id.picture));
-
-
-            //view.FindViewById<ImageView>(Resource.Id.picture).SetBackgroundResource(resourceId);
-
             return view;
         }
 

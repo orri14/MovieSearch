@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:id="@+id/titleEditText"
-            android:hint="Search String..." />
+            android:hint="Search Title" />
         <Button
             android:id="@+id/searchButton"
             android:textAllCaps="false"
@@ -29,10 +29,10 @@
             android:layout_marginTop="20dp"
             android:text="Search" />
         <ProgressBar
-          style="?android:attr/progressBarStyleSmall"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/progressSpinner"
-          android:layout_marginTop="20dp" />
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressSpinner"
+            android:layout_marginTop="20dp" />
     </LinearLayout>
 </RelativeLayout>
