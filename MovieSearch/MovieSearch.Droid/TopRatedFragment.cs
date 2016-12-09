@@ -7,7 +7,7 @@ namespace MovieSearch.Droid
 
     using MovieSearch.Model;
 
-    public class OtherFragment : Fragment
+    public class TopRatedFragment : Fragment
     {
 
     }

@@ -23,12 +23,12 @@ namespace MovieSearch.Droid
             var fragments = new Fragment[]
                                 {
                                     new TitleSearchFragment(),
-                                    new OtherFragment()
+                                    new TopRatedFragment()
                                 };
             var titles = CharSequence.ArrayFromStringArray(new[]
                                 {
                                     "Search",
-                                    "Other"
+                                    "Top Rated"
                                 });
 
             var viewPager = activity.FindViewById<ViewPager>(Resource.Id.viewpager);

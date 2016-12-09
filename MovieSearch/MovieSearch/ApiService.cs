@@ -68,22 +68,31 @@ namespace MovieSearch
                         //Get the movie duration
                         ApiQueryResponse<Movie> movie = await _movieApi.FindByIdAsync(info.Id);
 
-                        if (movie != null)
+                        if (movie != null && movie.Item != null)
                         {
                             film.duration = "";
                             if (movie.Item.Runtime != null)
                             {
                                 film.duration = movie.Item.Runtime.ToString();
-                            }                            
+                            }
                         }
 
+                        ApiQueryResponse<MovieCredit> credits = null;
 
                         //Get the cast of a movie
-                        ApiQueryResponse<MovieCredit> credits = await _movieApi.GetCreditsAsync(info.Id);
+                        try
+                        {
+                            credits = await _movieApi.GetCreditsAsync(info.Id);
 
+                        }
+                        catch (Exception)
+                        {
+                           
+                        }
+                        
                         List<string> cast = new List<string>();
 
-                        if (credits.Item != null)
+                        if (credits != null && credits.Item != null)
                         {
                             if (credits.Item.CastMembers != null)
                             {

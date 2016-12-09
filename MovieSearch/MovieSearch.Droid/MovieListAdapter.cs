@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using MovieSearch.Model;
 using Java.IO;
+using Square.Picasso;
 
 
 namespace MovieSearch.Droid
@@ -52,10 +53,16 @@ namespace MovieSearch.Droid
                 "interstellar.jpg",
                 "drawable",
                 this._context.PackageName);*/
+            string ImageUrl = "http://image.tmdb.org/t/p/w92";
 
-            var file = new File(movie.imageName);
+            /*var file = new File(movie.imageName);
             var bmimg = BitmapFactory.DecodeFile(file.AbsolutePath);
-            view.FindViewById<ImageView>(Resource.Id.picture).SetImageBitmap(bmimg);
+            view.FindViewById<ImageView>(Resource.Id.picture).SetImageBitmap(bmimg);*/
+
+            Picasso.With(this._context)
+           .Load(String.Concat(ImageUrl, movie.imageName))
+           .Into(view.FindViewById<ImageView>(Resource.Id.picture));
+
 
             //view.FindViewById<ImageView>(Resource.Id.picture).SetBackgroundResource(resourceId);
 

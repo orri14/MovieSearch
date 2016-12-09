@@ -50,11 +50,14 @@ namespace MovieSearch.Droid
                 _spinner.Visibility = ViewStates.Visible;
 
                 List<FilmInfo> movies = await _api.getMoviesByTitle(titleEditText.Text);
-                movies = await _downloader.downloadPosters(movies);
+                //movies = await _downloader.downloadPosters(movies);
 
                 var intent = new Intent(this.Context, typeof(MovieListActivity));
                 intent.PutExtra("MovieList", JsonConvert.SerializeObject(movies));
                 this.StartActivity(intent);
+
+                searchButton.Visibility = ViewStates.Visible;
+                _spinner.Visibility = ViewStates.Invisible;
             };
 
             return rootView;

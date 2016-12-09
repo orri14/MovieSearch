@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MovieDownload;
 using MovieSearch.Model;
+using Square.Picasso;
 
 namespace MovieSearch.Droid
 {
@@ -20,6 +21,7 @@ namespace MovieSearch.Droid
             foreach (FilmInfo film in movies)
             {
                 var posterlink = film.imageName;
+
 
                 var ImagePath = downloader.LocalPathForFilename(posterlink);
 
